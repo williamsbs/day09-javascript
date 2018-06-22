@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Calc</title>
+    <script src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+    <script>
+        var calc;
+        var number1;
+        var number2;
+        var op;
+        $(document).ready(function(){
+            calc = $('#calc');
+            number1 = $('#number1');
+            number2 = $('#number2');
+            op = $('#op');
+            calc.submit(submit);
+            setInterval("alert('Please, use me...')", 30000);
+        });
+        function numIsValid(nb1, nb2) {
+            return nb1 == parseInt(nb1, 10) && nb1 >= 0 && nb2 == parseInt(nb2, 10) && nb2 >= 0;
+        }
+        function submit(event) {
+            event.preventDefault();
+            var nb1 = Number(number1.val());
+            var nb2 = Number(number2.val());
+            if (!numIsValid(number1.val(), number2.val())) {
+                alert("Error :(");
+                return false;
+            }
+            switch (op.val()) {
+                case ('add'):
+                    result(nb1 + nb2);
+                    break;
+                case ('mul'):
+                    result(nb1 * nb2);
+                    break;
+                case ('div'):
+                    if (nb2 === 0) {
+                        result("It’s over 9000!");
+                    } else {
+                        result(nb1 / nb2);
+                    }
+                    break;
+                case ('mod'):
+                    if (nb2 === 0) {
+                        result("It’s over 9000!");
+                    } else {
+                        result(nb1 / nb2);
+                    }
+                    break;
+                case ('min'):
+                    result(nb1 - nb2);
+                    break;
+                default:
+                    result("operation not found");
+                    break;
+            }
+        }
+        function result(res) {
+            console.log(res);
+            alert(res);
+        }
+    </script>
+</head>
+<body>
+<h1>Calculette</h1>
+<form action="" id="calc">
+    <input type="text" id="number1">
+    <select id="op">
+        <option value="add">+</option>
+        <option value="min">-</option>
+        <option value="mul">*</option>
+        <option value="div">/</option>
+        <option value="mod">%</option>
+    </select>
+    <input type="text" id="number2">
+    <input type="submit" id="submit" value="Try me!">
+</from>
+</body>
+</html>

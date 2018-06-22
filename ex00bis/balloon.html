@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Balloon</title>
+    <script   src="https://code.jquery.com/jquery-2.2.3.min.js"></script>
+    <style>
+        div.balloon {
+            height: 200px;
+            width: 200px;
+            background-color: red;
+            border-radius: 50%;
+			margin: auto;
+        }
+    </style>
+    <script>
+        var color = {0: 'red', 1: 'green', 2: 'blue'};
+        var i = 0;
+        var balloon;
+        var size = 200;
+        $(document).ready(function(){
+            balloon = $('#balloon');
+            balloon.click(augmente_norm);
+            balloon.mouseleave(diminue_rev);
+        })
+        function diminue_rev(){
+            size -= 5;
+            if (size < 200) {
+                size = 200;
+            }
+            i--;
+            if (i < 0) {
+                i = 2;
+            }
+            balloonRefresh(i);
+        }
+        function augmente_norm() {
+            size += 10;
+            if (size > 420) {
+                size = 200;
+            }
+            i++;
+            if (i > 2) {
+                i = 0;
+            }
+            balloonRefresh(i);
+        }
+        function balloonRefresh(i){
+            balloon.css('height', size);
+            balloon.css('width', size);
+            balloon.css('backgroundColor', color[i]);
+        }
+    </script>
+</head>
+<body>
+    <div class="balloon" id="balloon">
+
+    </div>
+</body>
+</html>
